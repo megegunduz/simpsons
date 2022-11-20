@@ -18,4 +18,5 @@ export default {
     section: measure(50),
     border: measure(1),
     elevation: e => measure(Platform.Version >= 28 ? e : e / 3),
+    headerHeight: measure(50),
 };
