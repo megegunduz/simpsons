@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { HomeSelectors, HomeSlice } from '../Redux/HomeRedux';
+
+import CharacterItem from '../Components/CharacterItem';
 
 import styles from '../styles/HomeScreenStyles';
 
@@ -10,7 +12,7 @@ const HomeScreen = props => {
     const characters = useSelector(HomeSelectors.characters);
 
     useEffect(() => {
-        characters.length === 0 &&
+        (!characters || characters.length === 0) &&
             dispatch(HomeSlice.actions.fetchCharacters());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -20,11 +22,12 @@ const HomeScreen = props => {
             <FlatList
                 data={characters}
                 renderItem={({ item, index }) => (
-                    <View>
-                        <Text>{item.name}</Text>
-                    </View>
+                    <CharacterItem character={item} index={index} />
                 )}
-                keyExtractor={(item, index) => item.id}
+                keyExtractor={(item, index) => item?.id}
+                ItemSeparatorComponent={() => <View style={styles.separator} />}
+                contentContainerStyle={styles.flatListContentContainer}
+                showsVerticalScrollIndicator={false}
             />
         </View>
     );

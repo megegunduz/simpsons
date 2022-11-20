@@ -1,6 +1,15 @@
 const ConstantColors = {
     white: '#FFFFFF',
     black: '#000000',
+    gray: '#8A9197',
+    green: '#46732E',
+    red: '#C80813',
+    yellow: '#FED439',
+    brown: '#91331F',
+    lightBrown: '#D2AF81',
+    blue: '#709AE1',
+    darkBlue: '#197EC0',
+    lightBlue: '#71D0F5',
 };
 
 /**
