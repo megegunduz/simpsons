@@ -1,0 +1,22 @@
+[
+    {
+        "key": "name",
+        "label": "Name Surname",
+        "multiline": false
+    },
+    {
+        "key": "job",
+        "label": "Job Title",
+        "multiline": false
+    },
+    {
+        "key": "description",
+        "label": "About Him/Her",
+        "multiline": true
+    },
+    {
+        "key": "avatar",
+        "label": "Image Link",
+        "multiline": false
+    }
+]
