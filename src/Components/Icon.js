@@ -19,6 +19,7 @@ const Icon = props => {
             onPress={onPress}
             disabled={!onPress}
             activeOpacity={0.4}
+            testID={'icon-touchable'}
         >
             <Svg style={style} width={width} height={height} />
         </TouchableOpacity>
