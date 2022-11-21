@@ -7,13 +7,16 @@
  * @param {Character} props.character
  */
 export const addCharacter = ({ characters, character }) => {
+
+    const list = [...characters];
+
     /** @type {Character} */
     const newCharacter = {
         ...character,
-        ranking: characters.length > 0 ? characters.length + 1 : 1,
+        ranking: list.length > 0 ? list.length + 1 : 1,
     };
 
-    characters.push(newCharacter);
+    list.push(newCharacter)
 
-    return characters;
+    return list;
 };

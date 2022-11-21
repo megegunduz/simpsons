@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addCharacter, deleteCharacter, updateRanking } from '../Utils';
+import { deleteCharacter, updateRanking } from '../Utils';
 
 /** @typedef {import('../../../Types/Character').Character} Character */
 /** @typedef {import('../../../Types/Character').CharacterList} CharacterList */
@@ -43,16 +43,6 @@ export const HomeSlice = createSlice({
                 characters: state.characters,
                 updatedCharacter: action.payload.character,
                 updateType: action.payload.updateType,
-            });
-        },
-        /**
-         * @param {HomeState} state
-         * @param {{type: string, payload:{character: Character}}} action
-         */
-        addCharacter: (state, action) => {
-            state.characters = addCharacter({
-                characters: state.characters,
-                character: action.payload.character,
             });
         },
     },

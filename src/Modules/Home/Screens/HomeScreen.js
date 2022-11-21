@@ -17,10 +17,8 @@ const HomeScreen = props => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        (!characters || characters.length === 0) &&
-            dispatch(HomeSlice.actions.fetchCharacters());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        dispatch(HomeSlice.actions.fetchCharacters());
+    }, [dispatch]);
 
     const _onPress_Add = () => {
         navigation.navigate(ScreenNames.ADD);
@@ -33,7 +31,7 @@ const HomeScreen = props => {
                 renderItem={({ item, index }) => (
                     <CharacterItem character={item} index={index} />
                 )}
-                keyExtractor={(item, index) => item?.id}
+                keyExtractor={(item, index) => item.index}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
                 contentContainerStyle={styles.flatListContentContainer}
                 showsVerticalScrollIndicator={false}

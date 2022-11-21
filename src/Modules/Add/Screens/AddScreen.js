@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import { Text, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+    Text,
+    TouchableOpacity,
+    ScrollView,
+    SafeAreaView,
+    View,
+} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input, NativeBaseProvider, FormControl } from 'native-base';
+import Modal from 'react-native-modal';
 
 import formFields from '../Constants/FormFields.json';
+import { AddSelectors, AddSlice } from '../Redux/AddRedux';
+import { useLoadingOverlay } from '../../../Features/Loading';
 
 import styles from '../styles/AddScreenStyles';
-import { HomeSlice } from '../../Home';
-import { useDispatch } from 'react-redux';
 
 const AddScreen = props => {
     const [formState, setFormState] = useState({
@@ -24,6 +32,20 @@ const AddScreen = props => {
     });
 
     const dispatch = useDispatch();
+    const isSuccess = useSelector(AddSelectors.isSuccess);
+    const isLoading = useSelector(AddSelectors.isLoading);
+    useLoadingOverlay(isLoading);
+
+    useEffect(() => {
+        // To close success modal on unmount, set success state to false
+        return () => {
+            dispatch(
+                AddSlice.actions.setIsSuccess({
+                    isSuccess: false,
+                }),
+            );
+        };
+    }, []);
 
     const updateForm = (text, fieldKey) => {
         setFormState({
@@ -33,7 +55,9 @@ const AddScreen = props => {
     };
 
     const _onPress_Add = () => {
-        let currentValidations = { ...validations };
+        let currentValidations = {
+            ...validations,
+        };
         for (let key in validations) {
             currentValidations[key] = getValidation(key);
         }
@@ -43,7 +67,11 @@ const AddScreen = props => {
             validaiton => validaiton === true,
         );
         isFormValid &&
-            dispatch(HomeSlice.actions.addCharacter({ character: formState }));
+            dispatch(
+                AddSlice.actions.addCharacter({
+                    character: formState,
+                }),
+            );
     };
 
     const getValidation = fieldKey => {
@@ -60,25 +88,44 @@ const AddScreen = props => {
                 <NativeBaseProvider>
                     {formFields.map((field, index) => {
                         return (
-                            <FormControl isInvalid={validations[field.key]} style={styles.inputContainer}>
-                                <FormControl.Label _text={{style: styles.inputLabel}}>
+                            <FormControl
+                                isInvalid={validations[field.key]}
+                                style={styles.inputContainer}
+                            >
+                                <FormControl.Label
+                                    _text={{
+                                        style: styles.inputLabel,
+                                    }}
+                                >
                                     {field.label}
                                 </FormControl.Label>
                                 <Input
                                     isInvalid={validations[field.key]}
                                     placeholder={field.label}
                                     borderColor={styles.formColors.border}
-                                    focusOutlineColor={styles.formColors.borderFocused}
-                                    invalidOutlineColor={styles.formColors.borderInvalid}
-                                    backgroundColor={styles.formColors.backgroundColor}
+                                    focusOutlineColor={
+                                        styles.formColors.borderFocused
+                                    }
+                                    invalidOutlineColor={
+                                        styles.formColors.borderInvalid
+                                    }
+                                    backgroundColor={
+                                        styles.formColors.backgroundColor
+                                    }
                                     cursorColor={styles.formColors.cursor}
-                                    placeholderTextColor={styles.formColors.placeholder}
+                                    placeholderTextColor={
+                                        styles.formColors.placeholder
+                                    }
                                     color={styles.formColors.text}
                                     onChangeText={text =>
                                         updateForm(text, field.key)
                                     }
                                 />
-                                <FormControl.ErrorMessage _text={{style: styles.inputValidation}}>
+                                <FormControl.ErrorMessage
+                                    _text={{
+                                        style: styles.inputValidation,
+                                    }}
+                                >
                                     {'This field is required'}
                                 </FormControl.ErrorMessage>
                             </FormControl>
@@ -89,6 +136,27 @@ const AddScreen = props => {
             <TouchableOpacity style={styles.addButton} onPress={_onPress_Add}>
                 <Text style={styles.addButtonText}>{'Add Character'}</Text>
             </TouchableOpacity>
+            <Modal
+                isVisible={isSuccess}
+                style={styles.successModal}
+                animationIn={'fadeIn'}
+                animationOut={'fadeOut'}
+                onBackdropPress={props.navigation.goBack}
+            >
+                <View style={styles.modalContentContainer}>
+                    <View style={styles.modalTitleContainer}>
+                        <Text style={styles.modalTitle}>
+                            {'Character added successfully!'}
+                        </Text>
+                    </View>
+                    <TouchableOpacity
+                        onPress={props.navigation.goBack}
+                        style={styles.modalButton}
+                    >
+                        <Text style={styles.modalButtonText}>{'Go Back'}</Text>
+                    </TouchableOpacity>
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 };

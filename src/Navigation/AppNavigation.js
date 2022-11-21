@@ -8,6 +8,7 @@ import { AddScreen } from '../Modules/Add';
 import Header from './Components/Header';
 
 import { ScreenNames } from '../Constants';
+import { InitialLoadingScreen } from '../Features/Loading';
 
 const AppStack = createStackNavigator();
 
@@ -18,6 +19,11 @@ const AppNavigation = props => {
                 header: headerProps => <Header {...headerProps} />,
             }}
         >
+            <AppStack.Screen
+                name={ScreenNames.INITIAL_LOADING}
+                options={{ headerShown: false }}
+                component={InitialLoadingScreen}
+            />
             <AppStack.Screen
                 name={ScreenNames.HOME}
                 component={HomeScreen}
