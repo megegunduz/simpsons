@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, NativeBaseProvider, FormControl } from 'native-base';
-import Modal from 'react-native-modal';
 
 import formFields from '../Constants/FormFields.json';
 import { AddSelectors, AddSlice } from '../Redux/AddRedux';
@@ -37,15 +36,15 @@ const AddScreen = props => {
     useLoadingOverlay(isLoading);
 
     useEffect(() => {
-        // To close success modal on unmount, set success state to false
-        return () => {
+        if (isSuccess && !isLoading) {
             dispatch(
                 AddSlice.actions.setIsSuccess({
                     isSuccess: false,
                 }),
             );
-        };
-    }, []);
+            props.navigation.goBack();
+        }
+    }, [isSuccess, isLoading]);
 
     const updateForm = (text, fieldKey) => {
         setFormState({
@@ -136,27 +135,6 @@ const AddScreen = props => {
             <TouchableOpacity style={styles.addButton} onPress={_onPress_Add}>
                 <Text style={styles.addButtonText}>{'Add Character'}</Text>
             </TouchableOpacity>
-            <Modal
-                isVisible={isSuccess}
-                style={styles.successModal}
-                animationIn={'fadeIn'}
-                animationOut={'fadeOut'}
-                onBackdropPress={props.navigation.goBack}
-            >
-                <View style={styles.modalContentContainer}>
-                    <View style={styles.modalTitleContainer}>
-                        <Text style={styles.modalTitle}>
-                            {'Character added successfully!'}
-                        </Text>
-                    </View>
-                    <TouchableOpacity
-                        onPress={props.navigation.goBack}
-                        style={styles.modalButton}
-                    >
-                        <Text style={styles.modalButtonText}>{'Go Back'}</Text>
-                    </TouchableOpacity>
-                </View>
-            </Modal>
         </SafeAreaView>
     );
 };

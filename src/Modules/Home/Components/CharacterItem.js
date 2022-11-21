@@ -14,8 +14,6 @@ import styles from '../styles/CharacterItemStyles';
  * @param {object} props
  * @param {import('../../../Types/Character').Character} props.character
  * @param {number} props.index
- * @param {() => void} props.updateRanking
- * @param {(character: import('../../../Types/Character').Character) => void} props.deleteCharacter
  * @returns {React.Component}
  */
 const CharacterItem = props => {
