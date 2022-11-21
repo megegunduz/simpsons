@@ -28,23 +28,14 @@ const HomeScreen = props => {
         <View style={styles.container}>
             <FlatList
                 data={characters}
-                renderItem={({ item, index }) => (
-                    <CharacterItem character={item} index={index} />
-                )}
-                keyExtractor={(item, index) => item.index}
+                renderItem={({ item, index }) => <CharacterItem character={item} index={index} />}
+                keyExtractor={(item, index) => index}
                 ItemSeparatorComponent={() => <View style={styles.separator} />}
                 contentContainerStyle={styles.flatListContentContainer}
                 showsVerticalScrollIndicator={false}
-                ListFooterComponent={() => (
-                    <View style={styles.flatListFooter} />
-                )}
+                ListFooterComponent={() => <View style={styles.flatListFooter} />}
             />
-            <Icon
-                svg={Svgs.Plus}
-                onPress={_onPress_Add}
-                containerStyle={styles.iconContainer}
-                style={styles.icon}
-            />
+            <Icon svg={Svgs.Plus} onPress={_onPress_Add} containerStyle={styles.iconContainer} style={styles.icon} />
         </View>
     );
 };

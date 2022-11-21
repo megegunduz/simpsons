@@ -10,13 +10,13 @@ function* watchAddCharacter() {
 function* workerAddCharacter(action) {
     const characters = yield select(HomeSelectors.characters);
     const { character } = action.payload;
-   
+
     yield put(AddSlice.actions.setIsLoading({ isLoading: true }));
     try {
         // Dummy delay to imitate waiting for a response
         const newCharacters = yield delay(1500, addCharacter({ characters, character }));
 
-        yield put(HomeSlice.actions.setCharacters({ characters: newCharacters }))
+        yield put(HomeSlice.actions.setCharacters({ characters: newCharacters }));
         yield put(AddSlice.actions.setIsSuccess({ isSuccess: true }));
     } catch (error) {
     } finally {

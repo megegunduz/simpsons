@@ -3,7 +3,7 @@ import { Colors, Metrics } from '../../../Constants';
 
 const iconSize = Metrics.measure(40);
 const buttonSize = Metrics.baseMargin + iconSize;
-const buttonMargin= Metrics.semiMargin;
+const buttonMargin = Metrics.semiMargin;
 const listFooterHeight = buttonSize + buttonMargin;
 
 export default StyleSheet.create({
@@ -35,5 +35,5 @@ export default StyleSheet.create({
         width: iconSize,
         height: iconSize,
         color: Colors.white,
-    }
+    },
 });

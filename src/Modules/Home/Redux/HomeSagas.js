@@ -4,10 +4,7 @@ import { fetchCharacters } from '../Services/fetchCharacters';
 import { HomeSelectors, HomeSlice } from './HomeRedux';
 
 function* watchInitialLoading() {
-    yield takeEvery(
-        InitialLoadingSlice.actions.runInitialJobs,
-        workerFetchCharacters,
-    );
+    yield takeEvery(InitialLoadingSlice.actions.runInitialJobs, workerFetchCharacters);
 }
 
 function* watchFetchCharacters() {

@@ -10,11 +10,7 @@ const Header = props => {
     const isHome = props.route.name === ScreenNames.HOME;
     return (
         <SafeAreaView edges={['top']} style={styles.container}>
-            <TouchableOpacity
-                style={styles.sideContainer}
-                onPress={props.navigation.goBack}
-                disabled={isHome}
-            >
+            <TouchableOpacity style={styles.sideContainer} onPress={props.navigation.goBack} disabled={isHome}>
                 {!isHome && <Icon svg={Svgs.Back} style={styles.backIcon} />}
             </TouchableOpacity>
             <View style={styles.titleContainer}>

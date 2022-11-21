@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Text,
-    TouchableOpacity,
-    ScrollView,
-    SafeAreaView,
-    View,
-} from 'react-native';
+import { Text, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input, NativeBaseProvider, FormControl } from 'native-base';
 
@@ -44,6 +38,7 @@ const AddScreen = props => {
             );
             props.navigation.goBack();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isSuccess, isLoading]);
 
     const updateForm = (text, fieldKey) => {
@@ -62,9 +57,7 @@ const AddScreen = props => {
         }
         setValidations(currentValidations);
 
-        const isFormValid = !Object.values(currentValidations).some(
-            validaiton => validaiton === true,
-        );
+        const isFormValid = !Object.values(currentValidations).some(validaiton => validaiton === true);
         isFormValid &&
             dispatch(
                 AddSlice.actions.addCharacter({
@@ -90,6 +83,7 @@ const AddScreen = props => {
                             <FormControl
                                 isInvalid={validations[field.key]}
                                 style={styles.inputContainer}
+                                key={field.key}
                             >
                                 <FormControl.Label
                                     _text={{
@@ -102,23 +96,13 @@ const AddScreen = props => {
                                     isInvalid={validations[field.key]}
                                     placeholder={field.label}
                                     borderColor={styles.formColors.border}
-                                    focusOutlineColor={
-                                        styles.formColors.borderFocused
-                                    }
-                                    invalidOutlineColor={
-                                        styles.formColors.borderInvalid
-                                    }
-                                    backgroundColor={
-                                        styles.formColors.backgroundColor
-                                    }
+                                    focusOutlineColor={styles.formColors.borderFocused}
+                                    invalidOutlineColor={styles.formColors.borderInvalid}
+                                    backgroundColor={styles.formColors.backgroundColor}
                                     cursorColor={styles.formColors.cursor}
-                                    placeholderTextColor={
-                                        styles.formColors.placeholder
-                                    }
+                                    placeholderTextColor={styles.formColors.placeholder}
                                     color={styles.formColors.text}
-                                    onChangeText={text =>
-                                        updateForm(text, field.key)
-                                    }
+                                    onChangeText={text => updateForm(text, field.key)}
                                 />
                                 <FormControl.ErrorMessage
                                     _text={{

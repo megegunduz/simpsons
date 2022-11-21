@@ -12,9 +12,7 @@ import styles from '../styles/InitialLoadingScreenStyles';
 
 const InitialLoadingScreen = props => {
     const dispatch = useDispatch();
-    const awaitedJobsCount = useSelector(
-        InitialLoadingSelectors.awaitedJobsCount,
-    );
+    const awaitedJobsCount = useSelector(InitialLoadingSelectors.awaitedJobsCount);
     const navigation = useNavigation();
 
     const [isAnimationComplete, setIsAnimationComplete] = useState(false);
@@ -27,11 +25,18 @@ const InitialLoadingScreen = props => {
         if (awaitedJobsCount === 0 && isAnimationComplete) {
             navigation.replace(ScreenNames.HOME);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, awaitedJobsCount, isAnimationComplete]);
 
     return (
         <View style={styles.container}>
-            <Lottie source={gifs.splash()} autoPlay loop={false} speed={0.8} onAnimationFinish={() => setIsAnimationComplete(true)} />
+            <Lottie
+                source={gifs.splash()}
+                autoPlay
+                loop={false}
+                speed={0.8}
+                onAnimationFinish={() => setIsAnimationComplete(true)}
+            />
         </View>
     );
 };

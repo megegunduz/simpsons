@@ -7,14 +7,13 @@ export const AddSlice = createSlice({
         isSuccess: false,
     },
     reducers: {
-        addCharacter: (state, action) => {
-        },
+        addCharacter: (state, action) => {},
         setIsLoading: (state, action) => {
             state.loading = action.payload.isLoading;
         },
         setIsSuccess: (state, action) => {
             state.isSuccess = action.payload.isSuccess;
-        }
+        },
     },
 });
 

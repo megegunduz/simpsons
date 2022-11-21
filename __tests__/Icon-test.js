@@ -6,17 +6,13 @@ import { fireEvent, waitFor, render } from '@testing-library/react-native';
 
 describe('Icon', () => {
     it('renders correctly', () => {
-        expect(
-            renderer.create(<Icon svg={Svgs.Plus} onPress={() => {}} />),
-        ).toMatchSnapshot();
+        expect(renderer.create(<Icon svg={Svgs.Plus} onPress={() => {}} />)).toMatchSnapshot();
     });
 
     it('onPress functionality', async () => {
         const onPressEvent = jest.fn();
         onPressEvent.mockReturnValue('Pressed');
-        const { getByTestId } = render(
-            <Icon svg={Svgs.Trash} onPress={onPressEvent} />,
-        );
+        const { getByTestId } = render(<Icon svg={Svgs.Trash} onPress={onPressEvent} />);
         await waitFor(() => {
             expect(getByTestId('icon-touchable')).toBeTruthy();
         });

@@ -5,10 +5,7 @@
  * @returns {import('../../../Types/Character').CharacterList}
  */
 export const deleteCharacter = ({ characters, deletedCharacter }) => {
-    const newList = characters.filter(
-        character =>
-            JSON.stringify(character) !== JSON.stringify(deletedCharacter),
-    );
+    const newList = characters.filter(character => JSON.stringify(character) !== JSON.stringify(deletedCharacter));
 
     return newList.map((character, index) => ({
         ...character,

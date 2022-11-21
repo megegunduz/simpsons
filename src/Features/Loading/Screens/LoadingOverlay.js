@@ -11,9 +11,7 @@ import styles from '../styles/LoadingOverlayStyles';
 
 const LoadingOverlay = props => {
     const awaitedJobs = useSelector(LoadingSelectors.awaitedJobs);
-    const awaitedInitialJobs = useSelector(
-        InitialLoadingSelectors.awaitedJobsCount,
-    );
+    const awaitedInitialJobs = useSelector(InitialLoadingSelectors.awaitedJobsCount);
     const dispatch = useDispatch();
 
     const _onWillShow = () => {
@@ -39,12 +37,7 @@ const LoadingOverlay = props => {
             backdropTransitionInTiming={500}
             backdropTransitionOutTiming={0}
         >
-            <Lottie
-                source={gifs.spinner()}
-                style={styles.lottie}
-                autoPlay
-                loop
-            />
+            <Lottie source={gifs.spinner()} style={styles.lottie} autoPlay loop />
         </Modal>
     );
 };

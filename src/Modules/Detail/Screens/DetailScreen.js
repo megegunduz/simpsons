@@ -11,19 +11,12 @@ import styles from '../styles/DetailScreenStyles';
 const DetailScreen = props => {
     /** @type {DetailRouteParams} */
     const {
-        character: { avatar, description, id, job, name, ranking },
+        character: { avatar, description, job, name },
     } = props.route.params;
 
     return (
-        <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.container}
-        >
-            <Image
-                source={{ uri: avatar }}
-                style={styles.image}
-                resizeMode={'contain'}
-            />
+        <ScrollView style={styles.scrollView} contentContainerStyle={styles.container}>
+            <Image source={{ uri: avatar }} style={styles.image} resizeMode={'contain'} />
             <View style={styles.titleContainer}>
                 <Text style={styles.name}>{name}</Text>
                 <Text style={styles.job}>{job}</Text>

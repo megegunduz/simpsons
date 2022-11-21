@@ -54,16 +54,9 @@ const CharacterItem = props => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                style={styles.touchable}
-                onPress={_onPress_Navigate}
-            >
+            <TouchableOpacity style={styles.touchable} onPress={_onPress_Navigate}>
                 <Text style={styles.ranking}>{ranking}</Text>
-                <Image
-                    source={{ uri: avatar }}
-                    style={styles.image}
-                    resizeMode={'contain'}
-                />
+                <Image source={{ uri: avatar }} style={styles.image} resizeMode={'contain'} />
                 <Text style={styles.name} numberOfLines={2}>
                     {name}
                 </Text>

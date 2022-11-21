@@ -11,13 +11,12 @@
 export const updateRanking = ({ characters, updatedCharacter, updateType }) => {
     let indexOfCharacter = getIndex(characters, updatedCharacter);
 
-    const canUpdate =
-        updateType === 'increase'
-            ? indexOfCharacter > 0
-            : indexOfCharacter < characters.length - 1;
+    const canUpdate = updateType === 'increase' ? indexOfCharacter > 0 : indexOfCharacter < characters.length - 1;
 
-    if (!canUpdate) return characters;
-    if ((updateType === 'increase') & canUpdate) {
+    if (!canUpdate) {
+        return characters;
+    }
+    if (updateType === 'increase' && canUpdate) {
         characters[indexOfCharacter].ranking -= 1;
         characters[indexOfCharacter - 1].ranking += 1;
     }
